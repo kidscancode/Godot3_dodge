@@ -5,7 +5,6 @@ signal hit
 var speed = 400
 var velocity = Vector2()
 var screensize
-var extents
 
 func _ready():
 	hide()
