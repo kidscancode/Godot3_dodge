@@ -2,7 +2,7 @@ extends Area2D
 
 signal hit
 
-var speed = 400
+var SPEED = 400
 var velocity = Vector2()
 var screensize
 
@@ -19,7 +19,7 @@ func _process(delta):
 	velocity.x = Input.is_action_pressed("ui_right") - Input.is_action_pressed("ui_left")
 	velocity.y = Input.is_action_pressed("ui_down") - Input.is_action_pressed("ui_up")
 	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
+		velocity = velocity.normalized() * SPEED
 		$Sprite.play()
 	else:
 		$Sprite.stop()
