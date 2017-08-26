@@ -23,8 +23,6 @@ color = Color( 0.253451, 0.425288, 0.429412, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
-[node name="Mobs" type="Node" parent="."]
-
 [node name="MobTimer" type="Timer" parent="."]
 
 process_mode = 1

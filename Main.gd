@@ -23,7 +23,7 @@ func game_over():
 	$HUD.game_over()
 
 func _on_MobTimer_timeout():
-	$Mobs.add_child(Mob.instance())
+	add_child(Mob.instance())
 
 func _on_StartTimer_timeout():
 	$MobTimer.start()
