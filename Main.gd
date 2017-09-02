@@ -20,7 +20,7 @@ func game_over():
 	$Music.stop()
 	$ScoreTimer.stop()
 	$MobTimer.stop()
-	$HUD.game_over()
+	$HUD.show_game_over()
 
 func _on_MobTimer_timeout():
 	add_child(Mob.instance())

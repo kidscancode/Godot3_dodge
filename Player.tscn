@@ -107,7 +107,7 @@ __meta__ = {
 scale = Vector2( 1.25, 1.25 )
 frames = SubResource( 1 )
 animation = "right"
-_sections_unfolded = [ "Region", "Transform" ]
+_sections_unfolded = [ "Region", "Transform", "Z" ]
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 
