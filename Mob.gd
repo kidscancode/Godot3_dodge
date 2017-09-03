@@ -3,7 +3,7 @@ extends Area2D
 var MIN_SPEED = 200
 var MAX_SPEED = 250
 var mob_types = ["walk", "swim", "fly"]
-var velocity = Vector2()
+var velocity
 var screensize
 var direction
 
@@ -15,18 +15,20 @@ func _ready():
 	
 func choose_start_location():
 	var edge = randi() % 4
-	if edge == 0:  # top
-		position = Vector2(rand_range(0, screensize.x), 0)
-		direction = PI/2
-	elif edge == 1:  # right
-		position = Vector2(screensize.x, rand_range(0, screensize.y))
-		direction = PI
-	elif edge == 2:  # bottom
-		position = Vector2(rand_range(0, screensize.x), screensize.y)
-		direction = PI * 3/2
-	elif edge == 3:  # left
-		position = Vector2(0, rand_range(0, screensize.y))
-		direction = 0
+	match edge:
+		0:  # top
+			position = Vector2(rand_range(0, screensize.x), 0)
+			direction = PI/2
+		1:  # right
+			position = Vector2(screensize.x, rand_range(0, screensize.y))
+			direction = PI
+		2:  # bottom
+			position = Vector2(rand_range(0, screensize.x), screensize.y)
+			direction = PI * 3/2
+		3:  # left
+			position = Vector2(0, rand_range(0, screensize.y))
+			direction = 0
+			
 	direction += rand_range(-PI/4, PI/4)
 	# textures are oriented pointing up, so add 90deg
 	rotation = direction + PI/2
