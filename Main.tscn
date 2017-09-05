@@ -1,14 +1,23 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
-[ext_resource path="res://art/House In a Forest Loop.ogg" type="AudioStream" id=4]
-[ext_resource path="res://art/gameover.wav" type="AudioStream" id=5]
+[ext_resource path="res://Mob.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://art/House In a Forest Loop.ogg" type="AudioStream" id=5]
+[ext_resource path="res://art/gameover.wav" type="AudioStream" id=6]
+
+[sub_resource type="Curve2D" id=1]
+
+bake_interval = 5.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 2.89188, 5.11682, 0, 0, 0, 0, 1.8782, 727.878, 0, 0, 0, 0, 481.354, 730.92, 0, 0, 0, 0, 482.368, 6.13051, 0, 0, 0, 0, 2.89188, 5.11682 )
+}
 
 [node name="Main" type="Node"]
 
 script = ExtResource( 1 )
+Mob = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 
@@ -21,7 +30,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.253451, 0.425288, 0.429412, 1 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="Player" parent="." instance=ExtResource( 3 )]
 
 [node name="MobTimer" type="Timer" parent="."]
 
@@ -49,11 +58,11 @@ autostart = false
 position = Vector2( 240, 450 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="HUD" parent="." instance=ExtResource( 3 )]
+[node name="HUD" parent="." instance=ExtResource( 4 )]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 
-stream = ExtResource( 4 )
+stream = ExtResource( 5 )
 volume_db = -8.0
 autoplay = false
 mix_target = 0
@@ -61,16 +70,24 @@ bus = "Master"
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 
-stream = ExtResource( 5 )
+stream = ExtResource( 6 )
 volume_db = -5.0
 autoplay = false
 mix_target = 0
 bus = "Master"
 
-[connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
+[node name="Path2D" type="Path2D" parent="."]
+
+curve = SubResource( 1 )
+
+[connection signal="hit" from="Player" to="." method="game_over"]
+
+[connection signal="timeout" from="MobTimer" to="." method="spawn_mob"]
 
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+
+[connection signal="start_game" from="HUD" to="." method="new_game"]
 
 

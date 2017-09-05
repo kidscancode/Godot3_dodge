@@ -16,25 +16,32 @@ func start(pos):
 	monitoring = true
 			
 func _process(delta):
-	velocity.x = Input.is_action_pressed("ui_right") - Input.is_action_pressed("ui_left")
-	velocity.y = Input.is_action_pressed("ui_down") - Input.is_action_pressed("ui_up")
+	velocity = Vector2()
+	if Input.is_action_pressed("ui_right"):
+		velocity.x += 1
+	if Input.is_action_pressed("ui_left"):
+		velocity.x -= 1
+	if Input.is_action_pressed("ui_down"):
+		velocity.y += 1
+	if Input.is_action_pressed("ui_up"):
+		velocity.y -= 1
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * SPEED
-		$Sprite.play()
+		$AnimatedSprite.play()
 	else:
-		$Sprite.stop()
+		$AnimatedSprite.stop()
 		
 	position += velocity * delta
 	position.x = clamp(position.x, 0, screensize.x)
 	position.y = clamp(position.y, 0, screensize.y)
 
 	if velocity.x != 0:
-		$Sprite.animation = "right"
-		$Sprite.flip_v = false
-		$Sprite.flip_h = velocity.x < 0
+		$AnimatedSprite.animation = "right"
+		$AnimatedSprite.flip_v = false
+		$AnimatedSprite.flip_h = velocity.x < 0
 	elif velocity.y != 0:
-		$Sprite.animation = "up"
-		$Sprite.flip_v = velocity.y > 0
+		$AnimatedSprite.animation = "up"
+		$AnimatedSprite.flip_v = velocity.y > 0
 
 func _on_Player_area_entered( area ):
 	call_deferred("set_monitoring", false)

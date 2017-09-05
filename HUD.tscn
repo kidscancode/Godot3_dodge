@@ -55,7 +55,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "custom_fonts" ]
 
-[node name="Message" type="Label" parent="."]
+[node name="MessageLabel" type="Label" parent="."]
 
 anchor_left = 2
 anchor_top = 2
@@ -109,7 +109,7 @@ shortcut = null
 group = null
 text = "Start"
 flat = false
-_sections_unfolded = [ "Anchor", "Margin", "Visibility", "custom_fonts" ]
+_sections_unfolded = [ "Visibility", "custom_fonts" ]
 
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
 

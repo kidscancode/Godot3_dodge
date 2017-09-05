@@ -1,22 +1,22 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://art/playerGrey_walk1.png" type="Texture" id=2]
-[ext_resource path="res://art/playerGrey_walk2.png" type="Texture" id=3]
-[ext_resource path="res://art/playerGrey_up1.png" type="Texture" id=4]
-[ext_resource path="res://art/playerGrey_up2.png" type="Texture" id=5]
+[ext_resource path="res://art/playerGrey_up1.png" type="Texture" id=2]
+[ext_resource path="res://art/playerGrey_up2.png" type="Texture" id=3]
+[ext_resource path="res://art/playerGrey_walk1.png" type="Texture" id=4]
+[ext_resource path="res://art/playerGrey_walk2.png" type="Texture" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
-"name": "right",
+"name": "up",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
-"name": "up",
+"name": "right",
 "speed": 5.0
 } ]
 
@@ -102,7 +102,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 
 scale = Vector2( 1.25, 1.25 )
 frames = SubResource( 1 )
@@ -130,7 +130,7 @@ visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
 process_material = SubResource( 7 )
-texture = ExtResource( 4 )
+texture = ExtResource( 2 )
 normal_map = null
 h_frames = 1
 v_frames = 1

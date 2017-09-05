@@ -8,16 +8,16 @@ func _input(event):
 			$StartButton.emit_signal("pressed")
 			
 func show_message(text):
-	$Message.text = text
-	$Message.show()
+	$MessageLabel.text = text
+	$MessageLabel.show()
 	$MessageTimer.start()
 	
 func show_game_over():
 	show_message("Game Over")
 	yield($MessageTimer, "timeout")
 	$StartButton.show()
-	$Message.text = "Dodge the\nCreeps!"
-	$Message.show()
+	$MessageLabel.text = "Dodge the\nCreeps!"
+	$MessageLabel.show()
 	
 func update_score(score):
 	$ScoreLabel.text = str(score)
@@ -27,4 +27,4 @@ func _on_StartButton_pressed():
 	emit_signal("start_game")
 
 func _on_MessageTimer_timeout():
-	$Message.hide()
+	$MessageLabel.hide()
