@@ -43,7 +43,10 @@ func _process(delta):
 		$AnimatedSprite.animation = "up"
 		$AnimatedSprite.flip_v = velocity.y > 0
 
-func _on_Player_area_entered( area ):
+func _on_Player_body_entered( body ):
 	call_deferred("set_monitoring", false)
 	hide()
 	emit_signal("hit")
+
+
+

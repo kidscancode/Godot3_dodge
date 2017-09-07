@@ -23,10 +23,12 @@ func game_over():
 	$MobTimer.stop()
 	$HUD.show_game_over()
 
-func spawn_mob():
+func _on_MobTimer_timeout():
 	var mob = Mob.instance()
-	var edge = randi() % 4
+	add_child(mob)
 	var direction
+	# choose one of the four edges
+	var edge = randi() % 4
 	match edge:
 		0:  # top
 			mob.position = Vector2(rand_range(0, screensize.x), 0)
@@ -44,9 +46,8 @@ func spawn_mob():
 	direction += rand_range(-PI/4, PI/4)
 	# textures are oriented pointing up, so add 90deg
 	mob.rotation = direction + PI/2
-	mob.velocity = Vector2(rand_range(mob.MIN_SPEED, mob.MAX_SPEED), 0).rotated(direction)
-	add_child(mob)
-
+	mob.set_linear_velocity(Vector2(rand_range(mob.MIN_SPEED, mob.MAX_SPEED), 0).rotated(direction))
+	
 func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
@@ -54,3 +55,4 @@ func _on_StartTimer_timeout():
 func _on_ScoreTimer_timeout():
 	score += 1
 	$HUD.update_score(score)
+	

@@ -33,17 +33,28 @@ custom_solver_bias = 0.0
 radius = 23.5235
 height = 19.1272
 
-[node name="Mob" type="Area2D"]
+[node name="Mob" type="RigidBody2D"]
 
 input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
+collision_layer = 1
+collision_mask = 0
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 0.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
 linear_damp = 0.1
+angular_velocity = 0.0
 angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Angular", "Collision", "Transform" ]
 __meta__ = {
 "_edit_group_": true
 }
@@ -63,7 +74,5 @@ shape = SubResource( 2 )
 [node name="Visibility" type="VisibilityNotifier2D" parent="."]
 
 rect = Rect2( -10, -10, 20, 20 )
-
-[connection signal="screen_exited" from="Visibility" to="." method="_on_Visibility_screen_exited"]
 
 
