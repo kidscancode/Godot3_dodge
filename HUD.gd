@@ -1,11 +1,6 @@
 extends CanvasLayer
 
 signal start_game
-	
-func _input(event):
-	if event.is_action_pressed("ui_select"):
-		if $StartButton.is_visible():
-			$StartButton.emit_signal("pressed")
 			
 func show_message(text):
 	$MessageLabel.text = text
