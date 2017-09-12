@@ -24,24 +24,12 @@ func game_over():
 	$HUD.show_game_over()
 
 func _on_MobTimer_timeout():
+	# choose a random location on the Path2D
+	$"MobPath/MobSpawnLocation".set_offset(randi())
 	var mob = Mob.instance()
 	add_child(mob)
-	var direction
-	# choose one of the four edges
-	var edge = randi() % 4
-	match edge:
-		0:  # top
-			mob.position = Vector2(rand_range(0, screensize.x), 0)
-			direction = PI/2
-		1:  # right
-			mob.position = Vector2(screensize.x, rand_range(0, screensize.y))
-			direction = PI
-		2:  # bottom
-			mob.position = Vector2(rand_range(0, screensize.x), screensize.y)
-			direction = PI * 3/2
-		3:  # left
-			mob.position = Vector2(0, rand_range(0, screensize.y))
-			direction = 0
+	var direction = $"MobPath/MobSpawnLocation".rotation
+	mob.position = $"MobPath/MobSpawnLocation".position
 	# add some randomness to the direction
 	direction += rand_range(-PI/4, PI/4)
 	# textures are oriented pointing up, so add 90deg

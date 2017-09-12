@@ -11,7 +11,7 @@
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 2.89188, 5.11682, 0, 0, 0, 0, 1.8782, 727.878, 0, 0, 0, 0, 481.354, 730.92, 0, 0, 0, 0, 482.368, 6.13051, 0, 0, 0, 0, 2.89188, 5.11682 )
+"points": PoolVector2Array( 0, 0, 0, 0, 1.70602, 3.56798, 0, 0, 0, 0, 482.263, 3.26522, 0, 0, 0, 0, 480.489, 729.458, 0, 0, 0, 0, 0.794434, 732.118, 0, 0, 0, 0, 1.97066, 3.83263 )
 }
 
 [node name="Main" type="Node"]
@@ -76,9 +76,20 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="Path2D" type="Path2D" parent="."]
+[node name="MobPath" type="Path2D" parent="."]
 
 curve = SubResource( 1 )
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+
+rotation = 3.14159
+offset = 0.0
+h_offset = 0.0
+v_offset = 0.0
+rotate = true
+cubic_interp = true
+loop = true
+lookahead = 4.0
 
 [connection signal="hit" from="Player" to="." method="game_over"]
 

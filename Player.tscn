@@ -23,8 +23,8 @@ animations = [ {
 [sub_resource type="CapsuleShape2D" id=2]
 
 custom_solver_bias = 0.0
-radius = 22.0177
-height = 12.3755
+radius = 19.5521
+height = 9.53202
 
 [sub_resource type="Gradient" id=3]
 
@@ -104,7 +104,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 
-scale = Vector2( 1.25, 1.25 )
+scale = Vector2( 1.1, 1.1 )
 frames = SubResource( 1 )
 animation = "right"
 _sections_unfolded = [ "Region", "Transform", "Z" ]
