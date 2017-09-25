@@ -21,6 +21,10 @@ Mob = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 486.0
 margin_bottom = 734.0
 rect_pivot_offset = Vector2( 0, 0 )
