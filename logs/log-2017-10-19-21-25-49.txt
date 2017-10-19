@@ -1,8 +1,0 @@
-Remote Debugger: Connection failed with status: '2', retrying in 1 sec.
-OpenGL ES 3.0 Renderer: Intel(R) Iris(TM) Graphics 6100
-GLES3: max ubo light: 409
-GLES3: max ubo reflections: 455, ubo size: 144
-Registered interface Native mobile
-FPS: 1
-FPS: 1
-FPS: 55
