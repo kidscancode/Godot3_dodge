@@ -25,11 +25,11 @@ func game_over():
 
 func _on_MobTimer_timeout():
 	# choose a random location on the Path2D
-	$"MobPath/MobSpawnLocation".set_offset(randi())
+	$MobPath/MobSpawnLocation.set_offset(randi())
 	var mob = Mob.instance()
 	add_child(mob)
-	var direction = $"MobPath/MobSpawnLocation".rotation
-	mob.position = $"MobPath/MobSpawnLocation".position
+	var direction = $MobPath/MobSpawnLocation.rotation
+	mob.position = $MobPath/MobSpawnLocation.position
 	# add some randomness to the direction
 	direction += rand_range(-PI/4, PI/4)
 	mob.rotation = direction
