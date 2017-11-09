@@ -23,8 +23,8 @@ animations = [ {
 [sub_resource type="CapsuleShape2D" id=2]
 
 custom_solver_bias = 0.0
-radius = 19.5521
-height = 9.53202
+radius = 39.3017
+height = 21.3597
 
 [sub_resource type="Gradient" id=3]
 
@@ -41,7 +41,7 @@ width = 2048
 min_value = 0.0
 max_value = 1.0
 bake_resolution = 100
-_data = [ Vector2( 0.00170928, 0.886719 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.306641 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.446289 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.306641 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=6]
 
@@ -50,6 +50,7 @@ curve = SubResource( 5 )
 
 [sub_resource type="ParticlesMaterial" id=7]
 
+render_priority = 0
 trail_divisor = 1
 emission_shape = 0
 flag_align_y = false
@@ -101,10 +102,11 @@ _sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_group_": true
 }
+SPEED = 400
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 
-scale = Vector2( 1.1, 1.1 )
+scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 animation = "right"
 _sections_unfolded = [ "Region", "Transform", "Z" ]
@@ -134,7 +136,7 @@ texture = ExtResource( 4 )
 normal_map = null
 h_frames = 1
 v_frames = 1
-_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Visibility" ]
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Transform", "Visibility" ]
 
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
 

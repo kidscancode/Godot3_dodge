@@ -2,7 +2,7 @@ extends Area2D
 
 signal hit
 
-var SPEED = 400
+export (int) var SPEED
 var velocity = Vector2()
 var screensize
 

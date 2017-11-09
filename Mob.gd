@@ -1,7 +1,7 @@
 extends RigidBody2D
 
-var MIN_SPEED = 150
-var MAX_SPEED = 250
+export (int) var MIN_SPEED
+export (int) var MAX_SPEED
 var mob_types = ["walk", "swim", "fly"]
 
 func _ready():
