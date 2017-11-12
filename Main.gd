@@ -2,11 +2,9 @@ extends Node
 
 export (PackedScene) var Mob
 var score
-var screensize
 
 func _ready():
 	randomize()
-	screensize = get_viewport().get_size()
 	
 func new_game():
 	score = 0
