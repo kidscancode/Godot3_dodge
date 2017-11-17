@@ -13,7 +13,7 @@ func _ready():
 func start(pos):
 	position = pos
 	show()
-	monitoring = true
+	$Collision.disabled = false
 			
 func _process(delta):
 	velocity = Vector2()
@@ -44,7 +44,7 @@ func _process(delta):
 		$AnimatedSprite.flip_v = velocity.y > 0
 
 func _on_Player_body_entered( body ):
-	call_deferred("set_monitoring", false)
+	$Collision.disabled = true
 	hide()
 	emit_signal("hit")
 

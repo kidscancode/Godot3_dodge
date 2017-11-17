@@ -23,8 +23,8 @@ animations = [ {
 [sub_resource type="CapsuleShape2D" id=2]
 
 custom_solver_bias = 0.0
-radius = 39.3017
-height = 21.3597
+radius = 26.5155
+height = 13.8847
 
 [sub_resource type="Gradient" id=3]
 
