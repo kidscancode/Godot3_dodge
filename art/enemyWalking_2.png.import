@@ -4,6 +4,10 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/enemyWalking_2.png-67c480ed60c35e95f5acb0436246b935.stex"
 
+[deps]
+
+source_md5="838f40a8b77a0cb387dc5e5aff6bd8d5"
+
 [params]
 
 compress/mode=0
