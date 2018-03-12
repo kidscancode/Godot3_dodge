@@ -33,6 +33,7 @@ colors = PoolColorArray( 1, 1, 1, 0.523804, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=4]
 
+flags = 4
 gradient = SubResource( 3 )
 width = 2048
 
@@ -45,6 +46,7 @@ _data = [ Vector2( 0, 0.446289 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.306641 ), 0.0, 0
 
 [sub_resource type="CurveTexture" id=6]
 
+flags = 4
 width = 2048
 curve = SubResource( 5 )
 
@@ -104,18 +106,18 @@ __meta__ = {
 }
 SPEED = 400
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 animation = "right"
 _sections_unfolded = [ "Region", "Transform", "Z" ]
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." index="1"]
 
 shape = SubResource( 2 )
 
-[node name="Trail" type="Particles2D" parent="."]
+[node name="Trail" type="Particles2D" parent="." index="2"]
 
 show_behind_parent = true
 emitting = true

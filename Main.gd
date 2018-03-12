@@ -5,7 +5,7 @@ var score
 
 func _ready():
 	randomize()
-	
+
 func new_game():
 	score = 0
 	$HUD.update_score(score)
@@ -13,7 +13,7 @@ func new_game():
 	$StartTimer.start()
 	$HUD.show_message("Get Ready")
 	$Music.play()
-	
+
 func game_over():
 	$DeathSound.play()
 	$Music.stop()
@@ -32,7 +32,7 @@ func _on_MobTimer_timeout():
 	direction += rand_range(-PI/4, PI/4)
 	mob.rotation = direction
 	mob.set_linear_velocity(Vector2(rand_range(mob.MIN_SPEED, mob.MAX_SPEED), 0).rotated(direction))
-	
+
 func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
@@ -40,4 +40,3 @@ func _on_StartTimer_timeout():
 func _on_ScoreTimer_timeout():
 	score += 1
 	$HUD.update_score(score)
-	

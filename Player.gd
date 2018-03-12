@@ -9,12 +9,12 @@ var screensize
 func _ready():
 	hide()
 	screensize = get_viewport_rect().size
-	
+
 func start(pos):
 	position = pos
 	show()
 	$Collision.disabled = false
-			
+
 func _process(delta):
 	velocity = Vector2()
 	if Input.is_action_pressed("ui_right"):
@@ -28,9 +28,11 @@ func _process(delta):
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * SPEED
 		$AnimatedSprite.play()
+		$Trail.emitting = true
 	else:
 		$AnimatedSprite.stop()
-		
+		$Trail.emitting = false
+
 	position += velocity * delta
 	position.x = clamp(position.x, 0, screensize.x)
 	position.y = clamp(position.y, 0, screensize.y)

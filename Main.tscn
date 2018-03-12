@@ -28,7 +28,9 @@ anchor_bottom = 0.0
 margin_right = 486.0
 margin_bottom = 734.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.253451, 0.425288, 0.429412, 1 )
@@ -62,6 +64,8 @@ position = Vector2( 240, 450 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="HUD" parent="." index="6" instance=ExtResource( 4 )]
+
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="Music" type="AudioStreamPlayer" parent="." index="7"]
 
