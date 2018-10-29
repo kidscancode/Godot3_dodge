@@ -14,7 +14,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 1.70602, 3.56798, 0, 0, 0, 0, 482.263, 3.26522, 0, 0, 0, 0, 480.489, 729.458, 0, 0, 0, 0, 0.794434, 732.118, 0, 0, 0, 0, 1.97066, 3.83263 )
 }
 
-[node name="Main" type="Node" index="0"]
+[node name="Main" type="Node"]
 
 script = ExtResource( 1 )
 Mob = ExtResource( 2 )
@@ -34,6 +34,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.253451, 0.425288, 0.429412, 1 )
+_sections_unfolded = [ "Rect" ]
 
 [node name="Player" parent="." index="1" instance=ExtResource( 3 )]
 
@@ -71,6 +72,7 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 stream = ExtResource( 5 )
 volume_db = -8.0
+pitch_scale = 1.0
 autoplay = false
 mix_target = 0
 bus = "Master"
@@ -79,12 +81,14 @@ bus = "Master"
 
 stream = ExtResource( 6 )
 volume_db = -5.0
+pitch_scale = 1.0
 autoplay = false
 mix_target = 0
 bus = "Master"
 
 [node name="MobPath" type="Path2D" parent="." index="9"]
 
+self_modulate = Color( 0.5, 0.6, 1, 0.7 )
 curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" index="0"]

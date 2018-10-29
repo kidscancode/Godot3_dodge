@@ -10,8 +10,8 @@ config_version=3
 
 [application]
 
-config/name="Dodge the Creeps"
-run/main_scene="res://Main.tscn"
+config/name="dodge_3.0"
+run/main_scene="res://Lobby.tscn"
 config/icon="res://icon.png"
 
 [display]

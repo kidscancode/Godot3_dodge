@@ -6,7 +6,8 @@ path="res://.import/playerGrey_walk2.png-34d2d916366100182d08037c51884043.stex"
 
 [deps]
 
-source_md5="9fc73e1224a6b16d8fb5d0f667e3aed2"
+source_file="res://art/playerGrey_walk2.png"
+dest_files=[ "res://.import/playerGrey_walk2.png-34d2d916366100182d08037c51884043.stex" ]
 
 [params]
 

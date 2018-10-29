@@ -6,7 +6,8 @@ path="res://.import/enemyFlyingAlt_2.png-31dc7310eda6e1b721224f3cd932c076.stex"
 
 [deps]
 
-source_md5="5281b0d2b947deb09cbf95ecf9628ae7"
+source_file="res://art/enemyFlyingAlt_2.png"
+dest_files=[ "res://.import/enemyFlyingAlt_2.png-31dc7310eda6e1b721224f3cd932c076.stex" ]
 
 [params]
 
