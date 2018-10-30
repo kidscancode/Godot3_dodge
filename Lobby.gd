@@ -23,6 +23,7 @@ func _player_disconnected(id):
 # callback from SceneTree, only for clients (not server)
 func _connected_ok():
 	# will not use this one
+	print("Connected ok")
 	pass
 	
 # callback from SceneTree, only for clients (not server)	
@@ -42,10 +43,9 @@ func _server_disconnected():
 
 func _end_game(with_error=""):
 	if (has_node("/root/Main")):
-		#erase pong scene
+		#erase game scene
 		get_node("/root/Main").free() # erase immediately, otherwise network might show errors (this is why we connected deferred above)
 		show()
-	
 	get_tree().set_network_peer(null) #remove peer
 	
 	get_node("Connect/join").set_disabled(false)
@@ -90,6 +90,7 @@ func _on_Button2_pressed():
 	get_tree().set_network_peer(host)
 	
 	_set_status("Connecting..",true)
+	
 
 
 

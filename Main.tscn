@@ -14,7 +14,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 1.70602, 3.56798, 0, 0, 0, 0, 482.263, 3.26522, 0, 0, 0, 0, 480.489, 729.458, 0, 0, 0, 0, 0.794434, 732.118, 0, 0, 0, 0, 1.97066, 3.83263 )
 }
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 script = ExtResource( 1 )
 Mob = ExtResource( 2 )
@@ -55,8 +55,8 @@ autostart = false
 [node name="StartTimer" type="Timer" parent="." index="4"]
 
 process_mode = 1
-wait_time = 2.0
-one_shot = true
+wait_time = 1.0
+one_shot = false
 autostart = false
 
 [node name="StartPosition" type="Position2D" parent="." index="5"]
@@ -65,8 +65,6 @@ position = Vector2( 240, 450 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="HUD" parent="." index="6" instance=ExtResource( 4 )]
-
-transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="Music" type="AudioStreamPlayer" parent="." index="7"]
 
@@ -111,6 +109,6 @@ lookahead = 4.0
 
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
 
-[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="start_game" from="HUD" to="." method="send_new_game"]
 
 

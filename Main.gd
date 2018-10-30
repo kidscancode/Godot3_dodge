@@ -2,18 +2,25 @@ extends Node
 
 export (PackedScene) var Mob
 var score
+signal game_finished()
+
 
 func _ready():
 	randomize()
+	
+func send_new_game():
+	rpc("new_game")
 
-func new_game():
+	
+sync func new_game():
 	score = 0
+	$HUD.hide_hud()
 	$HUD.update_score(score)
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.show_message("Get Ready")
 	$Music.play()
-
+	
 func game_over():
 	$DeathSound.play()
 	$Music.stop()
@@ -29,10 +36,10 @@ func _on_MobTimer_timeout():
 	var direction = $MobPath/MobSpawnLocation.rotation + PI/2
 	mob.position = $MobPath/MobSpawnLocation.position
 	# add some randomness to the direction
-	direction += rand_range(-PI/4, PI/4)
+	#direction += rand_range(-PI/4, PI/4)
 	mob.rotation = direction
 	mob.set_linear_velocity(Vector2(rand_range(mob.MIN_SPEED, mob.MAX_SPEED), 0).rotated(direction))
-
+	
 func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
@@ -40,3 +47,4 @@ func _on_StartTimer_timeout():
 func _on_ScoreTimer_timeout():
 	score += 1
 	$HUD.update_score(score)
+	
