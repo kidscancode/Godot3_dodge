@@ -62,7 +62,7 @@ func _set_status(text,isok):
 		get_node("Connect/status_ok").set_text("")
 		get_node("Connect/status_fail").set_text(text)
 
-func _on_Button_pressed():
+func _host():
 	
 	var host = NetworkedMultiplayerENet.new()
 	host.set_compression_mode(NetworkedMultiplayerENet.COMPRESS_RANGE_CODER)
@@ -77,7 +77,7 @@ func _on_Button_pressed():
 	get_node("Connect/host").set_disabled(true)
 	_set_status("Waiting for player..",true)
 
-func _on_Button2_pressed():
+func _join():
 	
 	var ip = get_node("Connect/addressLine").get_text()
 	if (not ip.is_valid_ip_address()):
