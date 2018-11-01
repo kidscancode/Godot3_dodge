@@ -10,8 +10,10 @@ func _ready():
 	
 func send_new_game():
 	rpc("new_game")
-
 	
+#func send_game_over():
+	#rpc("game_over")
+
 sync func new_game():
 	score = 0
 	$HUD.hide_hud()
@@ -43,6 +45,7 @@ func _on_MobTimer_timeout():
 func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
+	print("start timer")
 
 func _on_ScoreTimer_timeout():
 	score += 1

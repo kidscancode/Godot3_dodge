@@ -221,8 +221,8 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[connection signal="pressed" from="Connect/host" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Connect/host" to="." method="_host"]
 
-[connection signal="pressed" from="Connect/join" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="Connect/join" to="." method="_join"]
 
 

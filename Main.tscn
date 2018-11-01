@@ -55,8 +55,8 @@ autostart = false
 [node name="StartTimer" type="Timer" parent="." index="4"]
 
 process_mode = 1
-wait_time = 1.0
-one_shot = false
+wait_time = 2.0
+one_shot = true
 autostart = false
 
 [node name="StartPosition" type="Position2D" parent="." index="5"]
