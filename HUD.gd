@@ -9,6 +9,13 @@ func show_message(text):
 	
 func show_game_over():
 	show_message("Game Over")
+	#yield($MessageTimer, "timeout")
+	
+func show_all():
+	rpc("show_high_score")
+	
+sync func show_high_score():
+	show_message("High Score\n"+str(rpc("get_high_score")))
 	yield($MessageTimer, "timeout")
 	$StartButton.show()
 	$MessageLabel.text = "Dodge the\nCreeps!"

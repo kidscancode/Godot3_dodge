@@ -34,7 +34,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.253451, 0.425288, 0.429412, 1 )
-_sections_unfolded = [ "Rect" ]
+_sections_unfolded = [ "Material", "Pause", "Rect", "Visibility" ]
 
 [node name="Player" parent="." index="1" instance=ExtResource( 3 )]
 
@@ -59,14 +59,21 @@ wait_time = 2.0
 one_shot = true
 autostart = false
 
-[node name="StartPosition" type="Position2D" parent="." index="5"]
+[node name="HighScoreTimer" type="Timer" parent="." index="5"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[node name="StartPosition" type="Position2D" parent="." index="6"]
 
 position = Vector2( 240, 450 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="HUD" parent="." index="6" instance=ExtResource( 4 )]
+[node name="HUD" parent="." index="7" instance=ExtResource( 4 )]
 
-[node name="Music" type="AudioStreamPlayer" parent="." index="7"]
+[node name="Music" type="AudioStreamPlayer" parent="." index="8"]
 
 stream = ExtResource( 5 )
 volume_db = -8.0
@@ -75,7 +82,7 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="DeathSound" type="AudioStreamPlayer" parent="." index="8"]
+[node name="DeathSound" type="AudioStreamPlayer" parent="." index="9"]
 
 stream = ExtResource( 6 )
 volume_db = -5.0
@@ -84,7 +91,7 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="MobPath" type="Path2D" parent="." index="9"]
+[node name="MobPath" type="Path2D" parent="." index="10"]
 
 self_modulate = Color( 0.5, 0.6, 1, 0.7 )
 curve = SubResource( 1 )

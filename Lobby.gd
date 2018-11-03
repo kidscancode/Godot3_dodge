@@ -14,7 +14,6 @@ func _player_connected(id):
 	hide()
 
 func _player_disconnected(id):
-
 	if (get_tree().is_network_server()):
 		_end_game("Client disconnected")
 	else:
@@ -28,7 +27,6 @@ func _connected_ok():
 	
 # callback from SceneTree, only for clients (not server)	
 func _connected_fail():
-
 	_set_status("Couldn't connect",false)
 	
 	get_tree().set_network_peer(null) #remove peer

@@ -5,6 +5,7 @@ signal hit
 export (int) var SPEED
 var velocity = Vector2()
 var screensize
+var main = load("res://Main.gd").new()
 
 func _ready():
 	hide()
@@ -48,6 +49,7 @@ func _process(delta):
 func _on_Player_body_entered( body ):
 	$Collision.disabled = true
 	hide()
+	main._on_death()
 	emit_signal("hit")
 
 
