@@ -14,8 +14,7 @@ signal connection_established()
 #when server sees client connect, load waiting area (server only)
 func _player_connected(id):
 	#_load_game()
-	#get_node("Connect").hide()
-	#get_node("Players").show()
+	
 	#emit_signal("player_list_change")
 	pass
 	
