@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Lobby.gd" type="Script" id=1]
 
-[node name="Lobby" type="Control" index="0"]
+[node name="Lobby" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -307,7 +307,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[connection signal="pressed" from="Players/start" to="." method="send_load_game"]
+[connection signal="pressed" from="Players/start" to="." method="_on_start_pressed"]
 
 [connection signal="pressed" from="Connect/host" to="." method="_host"]
 

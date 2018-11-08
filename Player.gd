@@ -5,7 +5,7 @@ signal hit
 export (int) var SPEED
 var velocity = Vector2()
 var screensize
-var main = load("res://Main.gd").new()
+#var main = load("res://Main.gd").new()
 
 func _ready():
 	hide()
@@ -18,6 +18,7 @@ func start(pos):
 
 func _process(delta):
 	velocity = Vector2()
+	#if (is_network_master()):
 	if Input.is_action_pressed("ui_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("ui_left"):
@@ -34,9 +35,9 @@ func _process(delta):
 		$AnimatedSprite.stop()
 		$Trail.emitting = false
 
-	position += velocity * delta
-	position.x = clamp(position.x, 0, screensize.x)
-	position.y = clamp(position.y, 0, screensize.y)
+		position += velocity * delta
+		position.x = clamp(position.x, 0, screensize.x)
+		position.y = clamp(position.y, 0, screensize.y)
 
 	if velocity.x != 0:
 		$AnimatedSprite.animation = "right"
@@ -45,11 +46,14 @@ func _process(delta):
 	elif velocity.y != 0:
 		$AnimatedSprite.animation = "up"
 		$AnimatedSprite.flip_v = velocity.y > 0
+		
+		
+
 
 func _on_Player_body_entered( body ):
 	$Collision.disabled = true
 	hide()
-	main._on_death()
+	#main._on_death()
 	emit_signal("hit")
 
 

@@ -11,26 +11,86 @@ var player_name
 signal player_list_change()
 signal connection_established()
 
+
+#gamestate functions
+
+remote func pre_start_game():
+	# Change scene
+	var game = load("res://Main.tscn").instance()
+	game.connect("game_finished",self,"_end_game",[],CONNECT_DEFERRED) 
+	get_tree().get_root().add_child(game)
+
+	#get_tree().get_root().get_node("lobby").hide()
+
+	var player_scene = load("res://Player.tscn")
+
+	for p_id in players:
+		#var spawn_pos = world.get_node("spawn_points/" + str(spawn_points[p_id])).position
+		var player = player_scene.instance()
+
+		#player.set_name(str(p_id)) # Use unique ID as node name
+		#player.position=spawn_pos
+		player.set_network_master(p_id) #set unique id as master
+
+		#if (p_id == get_tree().get_network_unique_id()):
+			# If node for this peer id, set name
+			#player.set_player_name(player_name)
+		#else:
+			# Otherwise set name from peer
+			#player.set_player_name(players[p_id])
+
+		game.get_node("players").add_child(player)
+		post_start_game()
+
+remote func post_start_game():
+	get_tree().set_pause(false)
+
+	# Set up score
+	#game.get_node("score").add_player(get_tree().get_network_unique_id(), player_name)
+	#for pn in players:
+		#game.get_node("score").add_player(pn, players[pn])
+
+	#if (not get_tree().is_network_server()):
+		# Tell server we are ready to start
+		#rpc_id(1, "ready_to_start", get_tree().get_network_unique_id())
+	#elif players.size() == 0:
+		#post_start_game()
+
 #when server sees client connect, load waiting area (server only)
 func _player_connected(id):
 	#_load_game()
-	
 	#emit_signal("player_list_change")
 	pass
-	
+
+func _player_disconnected(id):
+	if (get_tree().is_network_server()):
+		if (has_node("/root/Main")): # Game is in progress
+			if(has_node("/root/Main/players/" + str(id))):
+				get_node("/root/Main/players/" + str(id)).queue_free() #remove player scene who disconnected mid-game
+			#emit_signal("game_error", "Player " + players[id] + " disconnected")
+			unregister_player(id)
+			
+			#end_game()
+		else: # Game is not in progress
+			# If we are the server, send to the new dude all the already registered players
+			unregister_player(id)
+			for p_id in players:
+				# Erase in the server
+				rpc_id(p_id, "unregister_player", id)
+
 #when client connects, load waiting area (client only)
 func on_connection_established(): 
 	get_node("Connect").hide()
 	get_node("Players").show()
 	
-func send_load_game():
-	rpc("_load_game")
+#func send_load_game():
+#	rpc("_load_game")
 	
-sync func _load_game():
-	print("LOADING")
-	var game = load("res://Main.tscn").instance()
-	game.connect("game_finished",self,"_end_game",[],CONNECT_DEFERRED) 
-	get_tree().get_root().add_child(game)
+#sync func _load_game():
+#	print("LOADING")
+#	var game = load("res://Main.tscn").instance()
+#	game.connect("game_finished",self,"_end_game",[],CONNECT_DEFERRED) 
+#	get_tree().get_root().add_child(game)
 
 func refresh_lobby():
 	var plist = players.values()
@@ -56,11 +116,10 @@ remote func register_player(id, new_player_name):
 	emit_signal("player_list_change")
 	#print("REGISTERED " + players[id])
 	
-func _player_disconnected(id):
-	if (get_tree().is_network_server()):
-		_end_game("Client disconnected")
-	else:
-		_end_game("Server disconnected")
+remote func unregister_player(id):
+	players.erase(id)
+	emit_signal("player_list_change")
+	
 
 # callback from SceneTree, only for clients (not server)
 func _connected_ok():
@@ -72,15 +131,14 @@ func _connected_ok():
 	
 # callback from SceneTree, only for clients (not server)	
 func _connected_fail():
-
 	_set_status("Couldn't connect",false)
-	
 	get_tree().set_network_peer(null) #remove peer
-	
 	get_node("Connect/join").set_disabled(false)
 	get_node("Connect/host").set_disabled(false)
 
 func _server_disconnected():
+	get_node("Players").hide()
+	get_node("Connect").show()
 	_end_game("Server disconnected")
 	
 ##### Game creation functions ######
@@ -119,7 +177,9 @@ func _host():
 	get_node("Connect/host").set_disabled(true)
 	get_node("Connect").hide()
 	get_node("Players").show()
+	refresh_lobby()
 	_set_status("Waiting for player..",true)
+	
 	
 
 func _join():
@@ -135,8 +195,12 @@ func _join():
 	
 	_set_status("Connecting..",true)
 	
-
-
+func _on_start_pressed():
+	assert(get_tree().is_network_server())
+	for p in players:
+		rpc_id(p, "pre_start_game")
+	pre_start_game()
+	
 
 ### INITIALIZER ####
 	
@@ -150,5 +214,9 @@ func _ready():
 	self.connect("player_list_change",self,"refresh_lobby")
 	self.connect("connection_established",self,"on_connection_established")
 	
+
+
+
+
 
 
