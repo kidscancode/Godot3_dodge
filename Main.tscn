@@ -14,7 +14,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 1.70602, 3.56798, 0, 0, 0, 0, 482.263, 3.26522, 0, 0, 0, 0, 480.489, 729.458, 0, 0, 0, 0, 0.794434, 732.118, 0, 0, 0, 0, 1.97066, 3.83263 )
 }
 
-[node name="Main" type="Node" index="0"]
+[node name="Main" type="Node"]
 
 script = ExtResource( 1 )
 Mob = ExtResource( 2 )

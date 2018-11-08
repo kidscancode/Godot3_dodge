@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Lobby.gd" type="Script" id=1]
 
-[node name="Lobby" type="Control"]
+[node name="Lobby" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
