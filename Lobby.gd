@@ -21,29 +21,25 @@ remote func pre_start_game():
 	get_tree().get_root().add_child(game)
 
 	#get_tree().get_root().get_node("lobby").hide()
-
+	
 	var player_scene = load("res://Player.tscn")
-
+	
 	for p_id in players:
 		#var spawn_pos = world.get_node("spawn_points/" + str(spawn_points[p_id])).position
 		var player = player_scene.instance()
-
-		#player.set_name(str(p_id)) # Use unique ID as node name
+		print("Added player instance: " + str(p_id))
+		
+		player.set_name(str(p_id)) # Use unique ID as node name
 		#player.position=spawn_pos
 		player.set_network_master(p_id) #set unique id as master
 
-		#if (p_id == get_tree().get_network_unique_id()):
-			# If node for this peer id, set name
-			#player.set_player_name(player_name)
-		#else:
-			# Otherwise set name from peer
-			#player.set_player_name(players[p_id])
 
 		game.get_node("players").add_child(player)
 		post_start_game()
 
 remote func post_start_game():
-	get_tree().set_pause(false)
+	#get_tree().set_pause(false)
+	pass
 
 	# Set up score
 	#game.get_node("score").add_player(get_tree().get_network_unique_id(), player_name)
@@ -137,6 +133,8 @@ func _connected_fail():
 	get_node("Connect/host").set_disabled(false)
 
 func _server_disconnected():
+	players.clear()
+	emit_signal("player_list_change")
 	get_node("Players").hide()
 	get_node("Connect").show()
 	_end_game("Server disconnected")
@@ -180,7 +178,6 @@ func _host():
 	refresh_lobby()
 	_set_status("Waiting for player..",true)
 	
-	
 
 func _join():
 	var ip = get_node("Connect/addressLine").get_text()
@@ -192,14 +189,18 @@ func _join():
 	host.set_compression_mode(NetworkedMultiplayerENet.COMPRESS_RANGE_CODER)
 	host.create_client(ip,DEFAULT_PORT)
 	get_tree().set_network_peer(host)
-	
 	_set_status("Connecting..",true)
+	
+	
+func get_player_list():
+	return players.values()
 	
 func _on_start_pressed():
 	assert(get_tree().is_network_server())
 	for p in players:
 		rpc_id(p, "pre_start_game")
 	pre_start_game()
+	#print(get_player_list())
 	
 
 ### INITIALIZER ####

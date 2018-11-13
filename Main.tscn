@@ -14,7 +14,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 1.70602, 3.56798, 0, 0, 0, 0, 482.263, 3.26522, 0, 0, 0, 0, 480.489, 729.458, 0, 0, 0, 0, 0.794434, 732.118, 0, 0, 0, 0, 1.97066, 3.83263 )
 }
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 script = ExtResource( 1 )
 Mob = ExtResource( 2 )
@@ -37,6 +37,8 @@ color = Color( 0.253451, 0.425288, 0.429412, 1 )
 _sections_unfolded = [ "Material", "Pause", "Rect", "Visibility" ]
 
 [node name="Player" parent="." index="1" instance=ExtResource( 3 )]
+
+visible = false
 
 [node name="MobTimer" type="Timer" parent="." index="2"]
 
@@ -99,7 +101,7 @@ curve = SubResource( 1 )
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" index="0"]
 
 position = Vector2( 1.70602, 3.56798 )
-rotation = -0.000630172
+rotation = -0.000630111
 offset = 0.0
 h_offset = 0.0
 v_offset = 0.0
