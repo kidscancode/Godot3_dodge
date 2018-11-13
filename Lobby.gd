@@ -5,6 +5,7 @@ const MAX_PEERS = 4
 
 #vars
 var players = {}
+var spawns = {}
 var player_name
 
 #signals
@@ -14,7 +15,7 @@ signal connection_established()
 
 #gamestate functions
 
-remote func pre_start_game():
+remote func pre_start_game(spawns):
 	# Change scene
 	var game = load("res://Main.tscn").instance()
 	game.connect("game_finished",self,"_end_game",[],CONNECT_DEFERRED) 
@@ -24,7 +25,7 @@ remote func pre_start_game():
 	
 	var player_scene = load("res://Player.tscn")
 	
-	for p_id in players:
+	for p_id in spawns: #players
 		#var spawn_pos = world.get_node("spawn_points/" + str(spawn_points[p_id])).position
 		var player = player_scene.instance()
 		print("Added player instance: " + str(p_id))
@@ -33,13 +34,11 @@ remote func pre_start_game():
 		#player.position=spawn_pos
 		player.set_network_master(p_id) #set unique id as master
 
-
 		game.get_node("players").add_child(player)
 		post_start_game()
 
 remote func post_start_game():
-	#get_tree().set_pause(false)
-	pass
+	get_tree().set_pause(false)
 
 	# Set up score
 	#game.get_node("score").add_player(get_tree().get_network_unique_id(), player_name)
@@ -197,9 +196,14 @@ func get_player_list():
 	
 func _on_start_pressed():
 	assert(get_tree().is_network_server())
+	spawns[1] = 1
+	print("Added spawn for: " + str(spawns[1]))
+	for p_id in players:
+		spawns[p_id] = p_id
+		print("Added spawn for: " + str(spawns[p_id]))
 	for p in players:
-		rpc_id(p, "pre_start_game")
-	pre_start_game()
+		rpc_id(p, "pre_start_game", spawns)
+	pre_start_game(spawns)
 	#print(get_player_list())
 	
 
