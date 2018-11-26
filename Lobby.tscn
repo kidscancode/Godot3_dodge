@@ -307,7 +307,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[connection signal="pressed" from="Players/start" to="." method="send_load_game"]
+[connection signal="pressed" from="Players/start" to="." method="_on_start_pressed"]
 
 [connection signal="pressed" from="Connect/host" to="." method="_host"]
 

@@ -38,6 +38,8 @@ _sections_unfolded = [ "Material", "Pause", "Rect", "Visibility" ]
 
 [node name="Player" parent="." index="1" instance=ExtResource( 3 )]
 
+visible = false
+
 [node name="MobTimer" type="Timer" parent="." index="2"]
 
 process_mode = 1
@@ -107,6 +109,8 @@ rotate = true
 cubic_interp = true
 loop = true
 lookahead = 4.0
+
+[node name="players" type="Node2D" parent="." index="11"]
 
 [connection signal="hit" from="Player" to="." method="game_over"]
 
