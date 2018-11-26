@@ -47,17 +47,30 @@ func game_over():
 #remote func get_high_score():
 	#return high_score[0]
 	
-func _on_MobTimer_timeout():
+master func _on_MobTimer_timeout():
 	# choose a random location on the Path2D
-	$MobPath/MobSpawnLocation.set_offset(randi())
+	if (get_tree().is_network_server()):
+		var offset = randi()
+		$MobPath/MobSpawnLocation.set_offset(offset)
+		var mob = Mob.instance()
+		add_child(mob)
+		var direction = $MobPath/MobSpawnLocation.rotation + PI/2
+		mob.position = $MobPath/MobSpawnLocation.position
+		# add some randomness to the direction
+		#direction += rand_range(-PI/4, PI/4)
+		mob.rotation = direction
+		var speed = rand_range(mob.MIN_SPEED, mob.MAX_SPEED)
+		rpc("mobTimer_sync", speed, offset, direction, mob.position)
+		mob.set_linear_velocity(Vector2(speed, 0).rotated(direction))
+	
+	
+remote func mobTimer_sync(speed, off, dir, mobPos):
+	$MobPath/MobSpawnLocation.set_offset(off)
 	var mob = Mob.instance()
 	add_child(mob)
-	var direction = $MobPath/MobSpawnLocation.rotation + PI/2
-	mob.position = $MobPath/MobSpawnLocation.position
-	# add some randomness to the direction
-	#direction += rand_range(-PI/4, PI/4)
-	mob.rotation = direction
-	mob.set_linear_velocity(Vector2(rand_range(mob.MIN_SPEED, mob.MAX_SPEED), 0).rotated(direction))
+	mob.position = mobPos
+	mob.rotation = dir
+	mob.set_linear_velocity(Vector2(speed, 0).rotated(dir))
 	
 func _on_StartTimer_timeout():
 	$MobTimer.start()
