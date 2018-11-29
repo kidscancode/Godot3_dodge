@@ -47,29 +47,38 @@ func _process(delta):
 		position += velocity * delta
 		position.x = clamp(position.x, 0, screensize.x)
 		position.y = clamp(position.y, 0, screensize.y)
+		if velocity.x != 0:
+			$AnimatedSprite.animation = "right"
+			$AnimatedSprite.flip_v = false
+			$AnimatedSprite.flip_h = velocity.x < 0
+		elif velocity.y != 0:
+			$AnimatedSprite.animation = "up"
+			$AnimatedSprite.flip_v = velocity.y > 0
 	else:
+		if slave_velocity.length() > 0:
+			$AnimatedSprite.play()
+			$Trail.emitting = true
+		else:
+			$AnimatedSprite.stop()
+			$Trail.emitting = false
 		position += slave_velocity * delta
 		position.x = clamp(position.x, 0, screensize.x)
 		position.y = clamp(position.y, 0, screensize.y)
 		position = slave_pos
-		#velocity = slave_velocity
-
-	if velocity.x != 0:
-		$AnimatedSprite.animation = "right"
-		$AnimatedSprite.flip_v = false
-		$AnimatedSprite.flip_h = velocity.x < 0
-	elif velocity.y != 0:
-		$AnimatedSprite.animation = "up"
-		$AnimatedSprite.flip_v = velocity.y > 0
-	if (not is_network_master()):
-		slave_pos = position	
-		
-
+		if slave_velocity.x != 0:
+			$AnimatedSprite.animation = "right"
+			$AnimatedSprite.flip_v = false
+			$AnimatedSprite.flip_h = slave_velocity.x < 0
+		elif slave_velocity.y != 0:
+			$AnimatedSprite.animation = "up"
+			$AnimatedSprite.flip_v = slave_velocity.y > 0
 
 func _on_Player_body_entered( body ):
 	$Collision.disabled = true
 	hide()
 	#main._on_death()
+	#rpc("check_game_over")
+	#print("Died")
 	emit_signal("hit")
-
+	rpc("check_game_over")
 
