@@ -101,7 +101,7 @@ curve = SubResource( 1 )
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" index="0"]
 
 position = Vector2( 1.70602, 3.56798 )
-rotation = -0.000630111
+rotation = -0.000630172
 offset = 0.0
 h_offset = 0.0
 v_offset = 0.0
@@ -112,7 +112,7 @@ lookahead = 4.0
 
 [node name="players" type="Node2D" parent="." index="11"]
 
-[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="hit" from="Player" to="." method="check_game_over"]
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 

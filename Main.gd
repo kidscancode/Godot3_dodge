@@ -31,7 +31,13 @@ sync func new_game():
 	$HUD.show_message("Get Ready")
 	$Music.play()
 	
-func game_over():
+func check_game_over(body):
+	for p in $players.get_children():
+		if ($Collision.disabled == false):
+			break
+	rpc("game_over")
+	
+sync func game_over():
 	$DeathSound.play()
 	$Music.stop()
 	$ScoreTimer.stop()
