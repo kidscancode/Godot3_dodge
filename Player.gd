@@ -77,7 +77,8 @@ func _on_Player_body_entered( body ):
 	$Collision.disabled = true
 	hide()
 	#main._on_death()
-	rpc("check_game_over",body)
-	#emit_signal("hit")
-
+	#rpc("check_game_over")
+	#print("Died")
+	emit_signal("hit")
+	rpc("check_game_over")
 

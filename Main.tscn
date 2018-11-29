@@ -39,6 +39,7 @@ _sections_unfolded = [ "Material", "Pause", "Rect", "Visibility" ]
 [node name="Player" parent="." index="1" instance=ExtResource( 3 )]
 
 visible = false
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="MobTimer" type="Timer" parent="." index="2"]
 
@@ -111,6 +112,8 @@ loop = true
 lookahead = 4.0
 
 [node name="players" type="Node2D" parent="." index="11"]
+
+_sections_unfolded = [ "Visibility" ]
 
 [connection signal="hit" from="Player" to="." method="check_game_over"]
 

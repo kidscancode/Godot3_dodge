@@ -4,6 +4,7 @@ extends Node
 
 export (PackedScene) var Mob
 var score
+var alive
 var high_score = []
 signal game_finished()
 #signal updated_high_score()
@@ -20,22 +21,25 @@ func send_new_game():
 
 sync func new_game():
 	score = 0
+	alive = 1
 	$HUD.hide_hud()
 	$HUD.update_score(score)
 	$Player.start($StartPosition.position)
 	
 	for p in $players.get_children():
 		p.start($StartPosition.position)
+		p.connect("hit", self, "check_game_over")
 		print("Adding player" + str(p))
+		alive += 1
 	$StartTimer.start()
 	$HUD.show_message("Get Ready")
 	$Music.play()
-	
-func check_game_over(body):
-	for p in $players.get_children():
-		if ($Collision.disabled == false):
-			break
-	rpc("game_over")
+
+func check_game_over():
+	alive -= 1
+	print("Alive: "+str(alive))
+	if (alive <= 0):
+		rpc("game_over")
 	
 sync func game_over():
 	$DeathSound.play()
