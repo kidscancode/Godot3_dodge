@@ -7,6 +7,7 @@ const MAX_PEERS = 4
 var players = {}
 var spawns = {}
 var player_name
+var playerCount
 
 #signals
 signal player_list_change()
@@ -20,12 +21,19 @@ remote func pre_start_game(spawns):
 	var game = load("res://Main.tscn").instance()
 	game.connect("game_finished",self,"_end_game",[],CONNECT_DEFERRED) 
 	get_tree().get_root().add_child(game)
-
+	playerCount = 1
 	#get_tree().get_root().get_node("lobby").hide()
-	
-	var player_scene = load("res://Player.tscn")
+	var player_scene
 	
 	for p_id in spawns: #players
+		if (playerCount == 1): 
+			player_scene = load("res://Player.tscn")
+		if (playerCount == 2):
+			player_scene = load("res://Player2.tscn")
+		if (playerCount == 3):
+			player_scene = load("res://Player3.tscn")
+		if (playerCount == 4):
+			player_scene = load("res://Player4.tscn")
 		#var spawn_pos = world.get_node("spawn_points/" + str(spawn_points[p_id])).position
 		var player = player_scene.instance()
 		print("Added player instance: " + str(p_id))
@@ -35,6 +43,7 @@ remote func pre_start_game(spawns):
 		player.set_network_master(p_id) #set unique id as master
 
 		game.get_node("players").add_child(player)
+		playerCount = playerCount + 1
 		post_start_game()
 
 remote func post_start_game():
