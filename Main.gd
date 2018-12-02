@@ -67,7 +67,7 @@ master func _on_MobTimer_timeout():
 		var direction = $MobPath/MobSpawnLocation.rotation + PI/2
 		mob.position = $MobPath/MobSpawnLocation.position
 		# add some randomness to the direction
-		#direction += rand_range(-PI/4, PI/4)
+		direction += rand_range(-PI/4, PI/4)
 		mob.rotation = direction
 		var speed = rand_range(mob.MIN_SPEED, mob.MAX_SPEED)
 		rpc("mobTimer_sync", speed, offset, direction, mob.position)

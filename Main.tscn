@@ -11,7 +11,7 @@
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 1.70602, 3.56798, 0, 0, 0, 0, 482.263, 3.26522, 0, 0, 0, 0, 480.489, 729.458, 0, 0, 0, 0, 0.794434, 732.118, 0, 0, 0, 0, 1.97066, 3.83263 )
+"points": PoolVector2Array( 0, 0, 0, 0, -2.32187, -0.727478, 0, 0, 0, 0, 1024.07, 0.500275, 0, 0, 0, 0, 1022.84, 599.636, 0, 0, 0, 0, -2.32187, 599.636, 0, 0, 0, 0, -2.32187, -0.727478 )
 }
 
 [node name="Main" type="Node" index="0"]
@@ -25,8 +25,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 486.0
-margin_bottom = 734.0
+margin_right = 1024.0
+margin_bottom = 600.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -71,7 +71,7 @@ autostart = false
 
 [node name="StartPosition" type="Position2D" parent="." index="6"]
 
-position = Vector2( 240, 450 )
+position = Vector2( 516.241, 362.831 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="HUD" parent="." index="7" instance=ExtResource( 4 )]
@@ -94,15 +94,19 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="MobPath" type="Path2D" parent="." index="10"]
+[node name="players" type="Node2D" parent="." index="10"]
+
+_sections_unfolded = [ "Visibility" ]
+
+[node name="MobPath" type="Path2D" parent="." index="11"]
 
 self_modulate = Color( 0.5, 0.6, 1, 0.7 )
 curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" index="0"]
 
-position = Vector2( 1.70602, 3.56798 )
-rotation = -0.000630172
+position = Vector2( -2.32187, -0.727478 )
+rotation = 0.00119619
 offset = 0.0
 h_offset = 0.0
 v_offset = 0.0
@@ -110,10 +114,6 @@ rotate = true
 cubic_interp = true
 loop = true
 lookahead = 4.0
-
-[node name="players" type="Node2D" parent="." index="11"]
-
-_sections_unfolded = [ "Visibility" ]
 
 [connection signal="hit" from="Player" to="." method="check_game_over"]
 
