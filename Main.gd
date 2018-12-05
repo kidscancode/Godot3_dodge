@@ -46,9 +46,6 @@ sync func game_over():
 	$Music.stop()
 	$ScoreTimer.stop()
 	$MobTimer.stop()
-	#rpc("update_high_score")
-	#$HighScoreTimer.start()
-	#yield($HighScoreTimer,"timeout")
 	$HUD.show_game_over()
 
 #sync func update_high_score():
