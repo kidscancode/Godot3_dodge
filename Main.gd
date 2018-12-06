@@ -21,7 +21,7 @@ func send_new_game():
 
 sync func new_game():
 	score = 0
-	alive = 1
+	alive = 0
 	$HUD.hide_hud()
 	$HUD.update_score(score)
 	$Player.start($StartPosition.position)
@@ -46,7 +46,7 @@ sync func game_over():
 	$Music.stop()
 	$ScoreTimer.stop()
 	$MobTimer.stop()
-	$HUD.show_game_over()
+	$HUD.show_game_over(score)
 
 #sync func update_high_score():
 	#high_score.push_front(score)
