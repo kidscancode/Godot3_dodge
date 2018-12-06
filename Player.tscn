@@ -1,20 +1,21 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://art/playerGrey_walk1.png" type="Texture" id=2]
-[ext_resource path="res://art/playerGrey_walk2.png" type="Texture" id=3]
-[ext_resource path="res://art/playerGrey_up1.png" type="Texture" id=4]
-[ext_resource path="res://art/playerGrey_up2.png" type="Texture" id=5]
+[ext_resource path="res://Lobby.tscn" type="PackedScene" id=2]
+[ext_resource path="res://art/playerGrey_walk1.png" type="Texture" id=3]
+[ext_resource path="res://art/playerGrey_walk2.png" type="Texture" id=4]
+[ext_resource path="res://art/playerGrey_up1.png" type="Texture" id=5]
+[ext_resource path="res://art/playerGrey_up2.png" type="Texture" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "right",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "up",
 "speed": 5.0
@@ -128,18 +129,22 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Rect" ]
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
+[node name="Lobby" parent="." index="1" instance=ExtResource( 2 )]
+
+visible = false
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="2"]
 
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 animation = "right"
 _sections_unfolded = [ "Region", "Transform", "Z" ]
 
-[node name="Collision" type="CollisionShape2D" parent="." index="2"]
+[node name="Collision" type="CollisionShape2D" parent="." index="3"]
 
 shape = SubResource( 2 )
 
-[node name="Trail" type="Particles2D" parent="." index="3"]
+[node name="Trail" type="Particles2D" parent="." index="4"]
 
 show_behind_parent = true
 emitting = true
@@ -156,7 +161,7 @@ visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
 process_material = SubResource( 7 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 normal_map = null
 h_frames = 1
 v_frames = 1

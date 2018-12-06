@@ -76,9 +76,7 @@ func _process(delta):
 func _on_Player_body_entered( body ):
 	$Collision.disabled = true
 	hide()
-	#main._on_death()
-	#rpc("check_game_over")
-	#print("Died")
-	emit_signal("hit")
-	rpc("check_game_over")
+	#emit_signal("hit")
+	#print(self.get_name())
+	get_tree().get_root().get_node("Main").check_game_over(self.get_name())
 

@@ -1,18 +1,18 @@
 extends CanvasLayer
 
 signal start_game
-var high_score = 0
+var best_score = 0
 			
 func show_message(text):
 	$MessageLabel.text = text
 	$MessageLabel.show()
 	$MessageTimer.start()
-	
+
 func show_game_over(score):
 	show_message("Game Over")
 	yield($MessageTimer, "timeout")
-	if (score > high_score):
-		high_score = score
+	if (score > best_score):
+		best_score = score
 		show_message("New High Score!\n"+str(score))
 		update_high_score(score)
 		yield($MessageTimer, "timeout")

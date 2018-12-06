@@ -5,7 +5,11 @@ extends Node
 export (PackedScene) var Mob
 var score
 var alive
-var high_score = []
+var high_score
+var score_list = []
+var best_score
+var list = []
+var count = 1
 signal game_finished()
 #signal updated_high_score()
 
@@ -24,29 +28,40 @@ sync func new_game():
 	alive = 0
 	$HUD.hide_hud()
 	$HUD.update_score(score)
-	$Player.start($StartPosition.position)
+	#$Player.start($StartPosition.position)
+	$Lobby.get_player_list()
 	
 	for p in $players.get_children():
 		p.start($StartPosition.position)
-		p.connect("hit", self, "check_game_over")
+		#p.connect("hit", self, "check_game_over")
 		print("Adding player" + str(p))
 		alive += 1
 	$StartTimer.start()
 	$HUD.show_message("Get Ready")
 	$Music.play()
 
-func check_game_over():
+func check_game_over(p_id):
 	alive -= 1
+	list.append(int(p_id))
+	count += 1
 	print("Alive: "+str(alive))
 	if (alive <= 0):
+		rpc_id(int(p_id),"show_event","You Won!\nYour Score: "+str(score))
+		$HighScoreTimer.start()
 		rpc("game_over")
-	
+		yield($HighScoreTimer, "timeout")
+		$HUD.show_game_over(score)
+	else:
+		rpc_id(int(p_id),"show_event","You Died!\nYour Score: "+str(score))
+
+remote func show_event(text):
+	$HUD.show_message(text)
+
 sync func game_over():
 	$DeathSound.play()
 	$Music.stop()
 	$ScoreTimer.stop()
 	$MobTimer.stop()
-	$HUD.show_game_over(score)
 
 #sync func update_high_score():
 	#high_score.push_front(score)
