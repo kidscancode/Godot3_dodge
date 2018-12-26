@@ -13,7 +13,7 @@ func _ready():
 func start(pos):
 	position = pos
 	show()
-	$Collision.disabled = false
+	$CollisionShape2D.disabled = false
 
 func _process(delta):
 	velocity = Vector2()
@@ -46,7 +46,7 @@ func _process(delta):
 		$AnimatedSprite.flip_v = velocity.y > 0
 
 func _on_Player_body_entered( body ):
-	$Collision.disabled = true
+	$CollisionShape2D.disabled = true
 	hide()
 	emit_signal("hit")
 
