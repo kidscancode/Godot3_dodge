@@ -3,7 +3,6 @@ extends Area2D
 signal hit
 
 export (int) var SPEED
-var velocity = Vector2()
 var screensize
 
 func _ready():
