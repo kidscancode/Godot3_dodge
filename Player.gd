@@ -6,12 +6,14 @@ export (int) var SPEED
 var screensize
 
 func _ready():
+	$CollisionShape2D.disabled = true
 	hide()
 	screensize = get_viewport_rect().size
 
 func start(pos):
 	position = pos
 	show()
+	$Trail.restart()
 	$CollisionShape2D.disabled = false
 
 func _process(delta):
