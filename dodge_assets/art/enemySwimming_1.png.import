@@ -2,26 +2,32 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/enemySwimming_2.png-4c0cbc0732264c4ea3290340bd4a0a62.stex"
+path="res://.import/enemySwimming_1.png-33cae58fcd6340a8a651c923413ba316.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_md5="d04b001ba2f4ac6884fdbe44b55fa656"
+source_file="res://dodge_assets/art/enemySwimming_1.png"
+dest_files=[ "res://.import/enemySwimming_1.png-33cae58fcd6340a8a651c923413ba316.stex" ]
 
 [params]
 
 compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
+compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
+process/invert_color=false
 stream=false
 size_limit=0
 detect_3d=true
